@@ -15,6 +15,13 @@ const theme = extendBaseTheme({
     Box,
     Flex,
   },
+  styles: {
+    global: () => ({
+      body: {
+        bg: "",
+      },
+    }),
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

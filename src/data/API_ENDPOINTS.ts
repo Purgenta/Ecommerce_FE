@@ -10,6 +10,7 @@ export const APIENDPOINTS = {
   category: {
     find: (id: number) => "category/" + id,
     findAll: "category/findall",
-    findByName: (name: string) => `category/findname/${name}`,
+    findByName: `category/findbyname`,
+    findCategoryFeatureAndValues: `category/findcategoryfeature&values`,
   },
 };
