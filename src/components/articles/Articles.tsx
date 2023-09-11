@@ -1,10 +1,28 @@
-import React from "react";
+import { useState } from "react";
 import CategoryFilters from "../category/categoryfilter/CategoryFilters";
 import { Container, Flex, Heading, List } from "@chakra-ui/react";
+import useGetFilteredProducts from "../../data/article/useGetFilteredProducts";
 type ArticlesProps = {
   name: string;
 };
+export type FilterProps = {
+  name?: string;
+  fromPrice?: number;
+  toPrice?: number;
+  features?: { id: number; values: string[] }[];
+  producerId?: number;
+  categoryName: string;
+  page: number;
+  size: number;
+};
 const Articles = ({ name }: ArticlesProps) => {
+  const [filter, setFilter] = useState<FilterProps>({
+    categoryName: name,
+    page: 0,
+    size: 15,
+  });
+  const { data } = useGetFilteredProducts(filter);
+  console.log(data);
   return (
     <Container>
       <Container
@@ -19,7 +37,9 @@ const Articles = ({ name }: ArticlesProps) => {
       <Flex>
         <CategoryFilters
           name={name}
-          onChange={(values) => console.log(values)}
+          onChange={(values) => {
+            setFilter((prev) => ({ ...prev, ...values }));
+          }}
         ></CategoryFilters>
         <Container flexGrow={2}>
           <List></List>

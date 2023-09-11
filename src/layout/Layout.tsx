@@ -2,16 +2,15 @@ import { Flex, Box, Button, Text, Container } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon, Icon } from "@chakra-ui/icons";
 import { FaHeart, FaBox } from "react-icons/fa6";
 import { Link } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import useGetCategories from "../data/category/useGetCategories";
 import CategoryMenu from "./CategoryMenu";
 import { createPortal } from "react-dom";
 import { HamburgerIcon } from "@chakra-ui/icons";
-type Props = {
-  children?: ReactNode;
-};
+import { Outlet } from "react-router-dom";
+
 const mainHeader = document.querySelector("#main-header")!;
-const Layout = ({ children }: Props) => {
+const Layout = () => {
   const [active, setActive] = useState(false);
   const { data } = useGetCategories();
   return (
@@ -68,19 +67,26 @@ const Layout = ({ children }: Props) => {
                   <Icon as={HamburgerIcon}></Icon>
                   <Text margin-left={3}>Products</Text>
                   {active ? (
-                    <CategoryMenu
-                      listProps={{
-                        bg: "white",
-                        position: "absolute",
-                        top: "50px",
-                        left: 0,
-                        zIndex: 10,
-                      }}
-                      base="categories"
-                      show={true}
-                      depth={0}
-                      hierachy={data}
-                    ></CategoryMenu>
+                    <Box
+                      display={"grid"}
+                      bg={"white"}
+                      position={"absolute"}
+                      top={"50px"}
+                      fontSize={"medium"}
+                      left={0}
+                      zIndex={10}
+                    >
+                      <CategoryMenu
+                        listProps={{
+                          backgroundColor: "inherit",
+                          minWidth: "300px",
+                        }}
+                        base="categories"
+                        show={true}
+                        depth={0}
+                        hierachy={data}
+                      ></CategoryMenu>
+                    </Box>
                   ) : (
                     <></>
                   )}
@@ -105,7 +111,7 @@ const Layout = ({ children }: Props) => {
           marginX={"auto"}
           flexGrow={3}
         >
-          {children}
+          {<Outlet />}
         </Box>
       </Flex>
     </>

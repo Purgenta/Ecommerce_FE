@@ -6,6 +6,7 @@ export const APIENDPOINTS = {
   },
   article: {
     find: (id: number) => "find/" + id,
+    filter: "article/filterproducts",
   },
   category: {
     find: (id: number) => "category/" + id,

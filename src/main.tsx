@@ -1,19 +1,17 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import {
-  ChakraProvider,
-  Box,
-  Flex,
-  extendBaseTheme,
+  Checkbox,
   Button,
+  ChakraBaseProvider,
+  extendBaseTheme,
 } from "@chakra-ui/react";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 const theme = extendBaseTheme({
   components: {
+    Checkbox,
     Button,
-    Box,
-    Flex,
   },
   styles: {
     global: () => ({
@@ -26,8 +24,8 @@ const theme = extendBaseTheme({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <ChakraProvider theme={theme}>
+    <ChakraBaseProvider theme={theme}>
       <App />
-    </ChakraProvider>
+    </ChakraBaseProvider>
   </BrowserRouter>
 );

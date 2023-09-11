@@ -6,7 +6,7 @@ const fetcher = async (name: string) => {
     await axios.get(APIENDPOINTS.category.findCategoryFeatureAndValues, {
       params: { name },
     })
-  ).data as { name: string; values: string[] }[];
+  ).data as { name: string; values: string[]; id: number }[];
 };
 const useGetCategoryFeatureValues = (name: string) => {
   const { data } = useSWR(
