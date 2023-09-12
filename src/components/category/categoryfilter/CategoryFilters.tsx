@@ -12,7 +12,7 @@ import {
 import { FilterProps } from "../../articles/Articles";
 import CategoryFilter from "./CategoryFilter";
 import { useEffect, useState } from "react";
-type CategoryFilterStates = Omit<FilterProps, "page" | "size">;
+type CategoryFilterStates = Omit<FilterProps, "page" | "size" | "sort">;
 type CategoryFilterProps = {
   onChange: (filter: CategoryFilterStates) => unknown;
   name: string;
@@ -25,15 +25,21 @@ const CategoryFilters = ({ onChange, name }: CategoryFilterProps) => {
   });
   useEffect(() => {
     onChange(filter);
-  }, [filter]);
+  }, [filter, onChange]);
   if (!data) return <></>;
   return (
     <Accordion as={List} defaultIndex={[0]} allowMultiple>
       {data.map((feature) => (
-        <AccordionItem my={5} fontSize={"xl"} as={ListItem} key={feature.name}>
+        <AccordionItem my={5} as={ListItem} key={feature.name}>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box
+                as="span"
+                flex="1"
+                textAlign="left"
+                fontSize={"medium"}
+                fontWeight={"bold"}
+              >
                 {feature.name}
               </Box>
               <AccordionIcon />

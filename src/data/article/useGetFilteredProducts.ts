@@ -5,8 +5,10 @@ import { APIENDPOINTS } from "../API_ENDPOINTS";
 import { Article } from "../../types/types";
 
 const fetchFilteredProducts = async (filter: FilterProps) => {
-  return (await axios.post(APIENDPOINTS.article.filter, filter))
-    .data as Article[];
+  return (await axios.post(APIENDPOINTS.article.filter, filter)).data as {
+    articles: Article[];
+    articleCount: number;
+  };
 };
 const useGetFilteredProducts = (filter: FilterProps) => {
   const { data, isLoading } = useSWR(filter, () =>

@@ -12,15 +12,36 @@ export type Pagination = {
 export type Photo = {
   id: number;
   url: string;
+  type: "MAIN" | "SECONDARY";
 };
 export type Article = {
   id: number;
   name: string;
   model: string;
-  photos: string[];
+  photos: Photo[];
+  flair?: {
+    flair: {
+      name: string;
+      color: string;
+    };
+  };
+  discount?: {
+    amount: number;
+  };
   producer: {
     id: number;
     name: string;
   };
-  price: string[];
+  price: Price[];
+  category: {
+    discount?: {
+      amount: number;
+    };
+  };
+};
+export type Price = {
+  id: number;
+  value: number;
+  addedAt: Date;
+  type: "ECOMMERCE" | "RETAIL";
 };

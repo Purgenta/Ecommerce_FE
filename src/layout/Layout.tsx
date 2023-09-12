@@ -1,4 +1,4 @@
-import { Flex, Box, Button, Text, Container } from "@chakra-ui/react";
+import { Flex, Box, Button, Text } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon, Icon } from "@chakra-ui/icons";
 import { FaHeart, FaBox } from "react-icons/fa6";
 import { Link } from "@chakra-ui/react";
@@ -16,8 +16,8 @@ const Layout = () => {
   return (
     <>
       {createPortal(
-        <Container as={"nav"}>
-          <Container color={"blackAlpha.900"} backgroundColor={"blue.900"}>
+        <Box as={"nav"}>
+          <Box color={"blackAlpha.900"} backgroundColor={"blue.900"}>
             <Flex maxWidth={"1280px"} flexGrow={2} marginX={"auto"}>
               <Flex
                 w="100%"
@@ -49,8 +49,8 @@ const Layout = () => {
                 </Flex>
               </Flex>
             </Flex>
-          </Container>
-          <Container color={"blackAlpha.900"} background={"whiteAlpha.700"}>
+          </Box>
+          <Box color={"blackAlpha.900"} background={"whiteAlpha.700"}>
             {data ? (
               <Flex
                 flexGrow={2}
@@ -95,8 +95,8 @@ const Layout = () => {
             ) : (
               <></>
             )}
-          </Container>
-        </Container>,
+          </Box>
+        </Box>,
         mainHeader
       )}
       <Flex
@@ -106,7 +106,7 @@ const Layout = () => {
         marginY={"4"}
       >
         <Box
-          backgroundColor={"whiteAlpha.700"}
+          backgroundColor={"whiteAlpha.300"}
           maxWidth={"1280px"}
           marginX={"auto"}
           flexGrow={3}
