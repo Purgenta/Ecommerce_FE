@@ -27,7 +27,6 @@ const CategoryFilter = ({ values, onChange }: CategoryFilterProps) => {
                 });
               }
             }}
-            borderColor={"blackAlpha.400"}
             colorScheme="blue"
             key={value}
             size={"md"}

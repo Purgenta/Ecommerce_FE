@@ -1,7 +1,10 @@
 import { useState } from "react";
 import CategoryFilters from "../category/categoryfilter/CategoryFilters";
-import { Container, Flex, Heading, List } from "@chakra-ui/react";
+import { Flex, Heading, List, Box, ListItem } from "@chakra-ui/react";
 import useGetFilteredProducts from "../../data/article/useGetFilteredProducts";
+import { Spinner } from "@chakra-ui/react";
+import SortArticles from "../category/categoryfilter/SortArticles";
+import Article from "./Article";
 type ArticlesProps = {
   name: string;
 };
@@ -14,18 +17,19 @@ export type FilterProps = {
   categoryName: string;
   page: number;
   size: number;
+  sort: string;
 };
 const Articles = ({ name }: ArticlesProps) => {
   const [filter, setFilter] = useState<FilterProps>({
     categoryName: name,
     page: 0,
     size: 15,
+    sort: "price DESC",
   });
-  const { data } = useGetFilteredProducts(filter);
-  console.log(data);
+  const { data, isLoading } = useGetFilteredProducts(filter);
   return (
-    <Container>
-      <Container
+    <Box>
+      <Box
         marginBlock={3}
         padding={2}
         borderBottom={"1px"}
@@ -33,19 +37,46 @@ const Articles = ({ name }: ArticlesProps) => {
         borderBottomColor={"black"}
       >
         <Heading fontSize={"2xl"}>Search results</Heading>
-      </Container>
-      <Flex>
+      </Box>
+      <Flex flexWrap={"wrap"}>
         <CategoryFilters
           name={name}
           onChange={(values) => {
             setFilter((prev) => ({ ...prev, ...values }));
           }}
         ></CategoryFilters>
-        <Container flexGrow={2}>
-          <List></List>
-        </Container>
+        <Box flexGrow={2}>
+          <Flex flexGrow={2} justifyContent={"flex-end"}>
+            <SortArticles
+              onChange={(sort) => {
+                setFilter((prev) => ({ ...prev, sort }));
+              }}
+            ></SortArticles>
+          </Flex>
+          {isLoading ? <Spinner></Spinner> : <></>}
+          <List
+            marginY={2}
+            marginX={3}
+            display={"grid"}
+            placeItems={"center"}
+            gap={4}
+            gridTemplateColumns={"repeat(auto-fit,minmax(200px,275px))"}
+          >
+            {data ? (
+              data.articles.map((item) => {
+                return (
+                  <ListItem height={"100%"} key={item.id}>
+                    <Article item={item} key={item.id} />
+                  </ListItem>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </List>
+        </Box>
       </Flex>
-    </Container>
+    </Box>
   );
 };
 
