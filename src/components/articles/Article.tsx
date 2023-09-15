@@ -32,7 +32,7 @@ const Article = ({ item }: Props) => {
         ></IconButton>
       </CardHeader>
       <CardBody>
-        <Image src={coverImage.url}></Image>
+        <Image height={"150px"} marginX={"auto"} src={coverImage.url}></Image>
         <Heading size={"md"}>{item.name}</Heading>
         <Text>Model: {item.model}</Text>
       </CardBody>
