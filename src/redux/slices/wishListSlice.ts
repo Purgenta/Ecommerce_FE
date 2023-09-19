@@ -25,5 +25,5 @@ export const wishListSlice = createSlice({
     },
   },
 });
-export const wishListSliceSelector = (state: RootState) => state;
+export const wishListSliceSelector = (state: RootState) => state.wishList;
 export default wishListSlice.reducer;

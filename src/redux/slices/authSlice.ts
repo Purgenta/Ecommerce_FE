@@ -25,7 +25,11 @@ export const authSlice = createSlice({
       state.role = null;
     },
     updateStatus: (state, action: PayloadAction<AuthSlice>) => {
-      state = action.payload;
+      const { email, isAuthenticated, jwt, role } = action.payload;
+      state.email = email;
+      state.isAuthenticated = isAuthenticated;
+      state.jwt = jwt;
+      state.role = role;
     },
     updateAccessToken: (state, action: PayloadAction<string>) => {
       state.jwt = action.payload;

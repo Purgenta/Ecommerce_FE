@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { CartItem } from "../../types/types";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 type CartSlice = {
   items: CartItem[];
 };
@@ -17,3 +18,5 @@ export const cartSlice = createSlice({
   },
 });
 export default cartSlice.reducer;
+export const cartSelector = (root: RootState) => root.cart;
+export const { setCart } = cartSlice.actions;

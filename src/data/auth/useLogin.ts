@@ -6,23 +6,31 @@ import { useToast } from "@chakra-ui/react";
 import { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { updateStatus } from "../../redux/slices/authSlice";
-import { Role } from "../../types/types";
+import { CartItem, Role } from "../../types/types";
+import { setCart } from "../../redux/slices/cartSlice";
 const useLogin = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const toast = useToast();
   const submitLoginForm = async (values: LoginFormValues) => {
     try {
-      const { email, role, token } = (
-        await axios.post(APIENDPOINTS.auth.login, values)
-      ).data as {
+      const {
+        email,
+        role,
+        token,
+        cart: { cartItems },
+      } = (await axios.post(APIENDPOINTS.auth.login, values)).data as {
         email: string;
         token: string;
         role: Role;
+        cart: {
+          cartItems: CartItem[];
+        };
       };
       dispatch(
         updateStatus({ email, role, jwt: token, isAuthenticated: true })
       );
+      dispatch(setCart(cartItems));
       toast({
         title: "Success",
         description: "Sucessfully logged in",

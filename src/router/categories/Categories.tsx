@@ -21,11 +21,15 @@ const Categories = () => {
   const hasChildren = data && data.childCategories.length;
   return (
     <Box>
-      <Grid as={List} templateColumns={"repeat(auto-fit,minmax(230px,1fr))"}>
+      <Grid
+        as={List}
+        gap={4}
+        templateColumns={"repeat(auto-fit,minmax(230px,1fr))"}
+      >
         {hasChildren ? (
           data.childCategories.map((category) => {
             return (
-              <GridItem as={ListItem} marginY={4} key={category.id}>
+              <GridItem as={ListItem} key={category.id}>
                 <Link to={location + `/${category.name}`}>
                   <Card>
                     <CardBody>
