@@ -65,7 +65,7 @@ const Articles = ({ name }: ArticlesProps) => {
             {data ? (
               data.articles.map((item) => {
                 return (
-                  <ListItem height={"100%"} key={item.id}>
+                  <ListItem height={"100%"} width={"100%"} key={item.id}>
                     <Article item={item} key={item.id} />
                   </ListItem>
                 );

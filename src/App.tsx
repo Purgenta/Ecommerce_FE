@@ -1,11 +1,15 @@
 import { useLocation } from "react-router-dom";
 import Router from "./router/Router";
 import { Box } from "@chakra-ui/react";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 function App() {
   const { pathname } = useLocation();
   return (
     <Box backgroundColor={"gray.300"}>
-      <Router key={pathname}></Router>
+      <Provider store={store}>
+        <Router key={pathname}></Router>
+      </Provider>
     </Box>
   );
 }

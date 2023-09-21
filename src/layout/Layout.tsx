@@ -1,29 +1,38 @@
-import { Flex, Box, Button, Text } from "@chakra-ui/react";
+import { Flex, Box, Button, Text, Grid, Badge } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon, Icon } from "@chakra-ui/icons";
-import { FaHeart, FaBox } from "react-icons/fa6";
+import { FaHeart, FaBox, FaUser, FaCartShopping } from "react-icons/fa6";
 import { Link } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { useState } from "react";
 import useGetCategories from "../data/category/useGetCategories";
 import CategoryMenu from "./CategoryMenu";
 import { createPortal } from "react-dom";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Outlet } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { cartSelector } from "../redux/slices/cartSlice";
+import { authSelect } from "../redux/slices/authSlice";
 const mainHeader = document.querySelector("#main-header")!;
 const Layout = () => {
   const [active, setActive] = useState(false);
   const { data } = useGetCategories();
+  const { items } = useSelector(cartSelector);
+  const { isAuthenticated } = useSelector(authSelect);
   return (
     <>
       {createPortal(
         <Box as={"nav"}>
-          <Box color={"blackAlpha.900"} backgroundColor={"blue.900"}>
+          <Box
+            color={"blackAlpha.900"}
+            paddingTop={4}
+            paddingBottom={1}
+            backgroundColor={"blue.900"}
+          >
             <Flex maxWidth={"1280px"} flexGrow={2} marginX={"auto"}>
               <Flex
                 w="100%"
                 color={"white"}
-                paddingX={"4"}
-                paddingY={"4"}
+                paddingX={4}
                 justifyContent={"space-between"}
               >
                 <Flex gap={"2"}>
@@ -49,12 +58,49 @@ const Layout = () => {
                 </Flex>
               </Flex>
             </Flex>
+            <Grid
+              padding={4}
+              gridTemplateColumns={"1fr 3fr 1fr"}
+              color={"white"}
+              maxWidth={"1280px"}
+              marginX={"auto"}
+            >
+              <Box>Logo placeholder</Box>
+              <Box>Search bar placeholder</Box>
+              <Flex justifyContent={"flex-end"} gap={4}>
+                <Link
+                  fontSize={"md"}
+                  as={ReactRouterLink}
+                  to={isAuthenticated ? "/logout" : "/login"}
+                >
+                  <Icon marginX={1} as={FaUser}></Icon>
+                  <span>{isAuthenticated ? "Logout" : "Login"}</span>
+                </Link>
+                <Link fontSize={"md"} as={ReactRouterLink} to={"/login"}>
+                  <Flex alignItems={"center"} position={"relative"}>
+                    <Badge
+                      top={-3}
+                      left={-2}
+                      backgroundColor={"yellow.400"}
+                      position={"absolute"}
+                    >
+                      {items.length}
+                    </Badge>
+                    <Icon marginX={1} as={FaCartShopping} />
+                    <span>Cart</span>
+                  </Flex>
+                </Link>
+              </Flex>
+            </Grid>
           </Box>
-          <Box color={"blackAlpha.900"} background={"whiteAlpha.700"}>
+          <Box
+            color={"blackAlpha.900"}
+            paddingY={2}
+            background={"whiteAlpha.700"}
+          >
             {data ? (
               <Flex
                 flexGrow={2}
-                paddingY={1}
                 paddingX={4}
                 maxWidth={"1280px"}
                 marginX={"auto"}
@@ -103,7 +149,6 @@ const Layout = () => {
         alignItems={"center"}
         backgroundColor={"whiteAlpha.700"}
         padding={"2"}
-        marginY={"4"}
       >
         <Box
           backgroundColor={"whiteAlpha.300"}

@@ -45,3 +45,9 @@ export type Price = {
   addedAt: Date;
   type: "ECOMMERCE" | "RETAIL";
 };
+export type Role = "ADMIN" | "USER";
+export type CartItem = {
+  id: number;
+  articleId: number;
+  quantity: number;
+};

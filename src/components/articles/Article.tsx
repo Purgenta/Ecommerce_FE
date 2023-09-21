@@ -9,6 +9,8 @@ import {
   Heading,
   Flex,
   Grid,
+  Button,
+  Icon,
 } from "@chakra-ui/react";
 import { Article as Item } from "../../types/types";
 import { FaCartShopping, FaHeart } from "react-icons/fa6";
@@ -24,15 +26,12 @@ const Article = ({ item }: Props) => {
   return (
     <Card height={"100%"}>
       <CardHeader display={"flex"} width={"100%"} justifyContent={"flex-end"}>
-        <IconButton
-          backgroundColor={"transparent"}
-          aria-label="add-to-favourites"
-          fontSize={"25px"}
-          icon={<FaHeart />}
-        ></IconButton>
+        <Button backgroundColor={"transparent"}>
+          <Icon fontSize={"2xl"} fill={"blackAlpha.300"} as={FaHeart}></Icon>
+        </Button>
       </CardHeader>
       <CardBody>
-        <Image src={coverImage.url}></Image>
+        <Image height={"150px"} marginX={"auto"} src={coverImage.url}></Image>
         <Heading size={"md"}>{item.name}</Heading>
         <Text>Model: {item.model}</Text>
       </CardBody>
