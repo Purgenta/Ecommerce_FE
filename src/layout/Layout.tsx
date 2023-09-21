@@ -1,4 +1,4 @@
-import { Flex, Box, Button, Text, Grid, Badge } from "@chakra-ui/react";
+import { Flex, Box, Button, Text, Grid, Badge, Image } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon, Icon } from "@chakra-ui/icons";
 import { FaHeart, FaBox, FaUser, FaCartShopping } from "react-icons/fa6";
 import { Link } from "@chakra-ui/react";
@@ -12,6 +12,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { cartSelector } from "../redux/slices/cartSlice";
 import { authSelect } from "../redux/slices/authSlice";
+import logo from "../assets/logo.svg";
 const mainHeader = document.querySelector("#main-header")!;
 const Layout = () => {
   const [active, setActive] = useState(false);
@@ -65,7 +66,9 @@ const Layout = () => {
               maxWidth={"1280px"}
               marginX={"auto"}
             >
-              <Box>Logo placeholder</Box>
+              <Box>
+                <Image src={logo}></Image>
+              </Box>
               <Box>Search bar placeholder</Box>
               <Flex justifyContent={"flex-end"} gap={4}>
                 <Link
@@ -76,7 +79,7 @@ const Layout = () => {
                   <Icon marginX={1} as={FaUser}></Icon>
                   <span>{isAuthenticated ? "Logout" : "Login"}</span>
                 </Link>
-                <Link fontSize={"md"} as={ReactRouterLink} to={"/login"}>
+                <Link fontSize={"md"} as={ReactRouterLink} to={"/cart"}>
                   <Flex alignItems={"center"} position={"relative"}>
                     <Badge
                       top={-3}

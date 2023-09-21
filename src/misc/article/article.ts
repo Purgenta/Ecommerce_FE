@@ -16,9 +16,9 @@ export const calculatePrice = (article: Article) => {
         : categoryDiscount.amount;
   }
   return {
-    price: articlePrice.value * (100 - discountAmount),
+    price: articlePrice.value * ((100 - discountAmount) / 100),
     retailPrice: retailPrice
-      ? retailPrice.value * (100 - discountAmount)
+      ? retailPrice.value * ((100 - discountAmount) / 100)
       : retailPrice,
     discountPercentage: discountAmount,
   };

@@ -48,6 +48,7 @@ export type Price = {
 export type Role = "ADMIN" | "USER";
 export type CartItem = {
   id: number;
+  article: Article;
   articleId: number;
   quantity: number;
 };

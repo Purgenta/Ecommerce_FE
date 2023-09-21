@@ -12,6 +12,7 @@ import {
   Button,
   Icon,
 } from "@chakra-ui/react";
+import useAddCartItem from "../../data/cart/useAddCartItem";
 import { Article as Item } from "../../types/types";
 import { FaCartShopping, FaHeart } from "react-icons/fa6";
 type Props = {
@@ -23,6 +24,7 @@ const Article = ({ item }: Props) => {
     (price) => price.type === "ECOMMERCE"
   )!;
   const retailPrice = item.price.find((price) => price.type === "RETAIL");
+  const addItem = useAddCartItem();
   return (
     <Card height={"100%"}>
       <CardHeader display={"flex"} width={"100%"} justifyContent={"flex-end"}>
@@ -64,6 +66,9 @@ const Article = ({ item }: Props) => {
             )}
           </Grid>
           <IconButton
+            onClick={async () => {
+              return await addItem(item.id, 1);
+            }}
             backgroundColor={"yellow.400"}
             variant={"outline"}
             aria-label="add-to-cart"
