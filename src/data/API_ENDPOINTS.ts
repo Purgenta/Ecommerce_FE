@@ -4,6 +4,12 @@ export const APIENDPOINTS = {
     register: "auth/register",
     refreshToken: "auth/refreshToken",
   },
+  cart: {
+    setItem: "cart/setitem",
+    addItem: "cart/additem",
+    getCartItems: "cart/cartdata",
+    deleteCartItem: (id: number) => "cart/removeitem/" + id,
+  },
   article: {
     find: (id: number) => "find/" + id,
     filter: "article/filterproducts",

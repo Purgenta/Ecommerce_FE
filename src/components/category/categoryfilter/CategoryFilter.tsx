@@ -8,7 +8,6 @@ type CategoryFilterProps = {
 const CategoryFilter = ({ values, onChange }: CategoryFilterProps) => {
   const [selected, setSelected] = useState<string[]>([]);
   useEffect(() => {
-    console.log(selected);
     onChange(selected);
   }, [selected]);
   return (

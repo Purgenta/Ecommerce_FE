@@ -5,4 +5,5 @@ export default axios.create({
 });
 export const privateAxiosInstance = axios.create({
   baseURL: "http://localhost:3000/",
+  withCredentials: true,
 });
